@@ -39,6 +39,9 @@ Available profiles:
         running IPFS on machines with public IPv4 addresses.
     'test' - Reduces external interference of IPFS daemon, this
         is useful when using the daemon in test environments.
+    'lowpower' - Reduces daemon overhead on the system. May affect node
+        functionality - performance of content discovery and data fetching
+        may be degraded.
 
 ipfs uses a repository in the local file system. By default, the repo is
 located at ~/.ipfs. To change the repo location, set the $IPFS_PATH
@@ -79,7 +82,7 @@ environment variable:
 	Run: func(req *cmds.Request, res cmds.ResponseEmitter, env cmds.Environment) {
 		cctx := env.(*oldcmds.Context)
 		if cctx.Online {
-			res.SetError(errors.New("init must be run offline only!"), cmdkit.ErrNormal)
+			res.SetError(errors.New("init must be run offline only"), cmdkit.ErrNormal)
 			return
 		}
 
